@@ -1,0 +1,9 @@
+mongodb2:
+  image: 'mongo:latest'
+  volumes:
+    - data:/data
+  environment:
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=1234
+  ports:
+    - "27018:27017"
