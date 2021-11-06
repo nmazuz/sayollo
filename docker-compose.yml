@@ -7,3 +7,7 @@ mongodb2:
     - MONGO_INITDB_ROOT_PASSWORD=1234
   ports:
     - "27018:27017"
+flask:
+  build: app
+  ports:
+    - "5000:5000"

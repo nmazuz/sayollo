@@ -30,9 +30,7 @@ mongo_client = pymongo.MongoClient('mongodb://' +
 db = mongo_client[MONGO_DB]
 
 @app.route('/')
-def connection():
-    collection = db[USER_COLLECTION]
-    collection.update({'user_id': 666}, {'$inc': {'impressions': 1, 'requests': 0}}, upsert=True)
+def hello():
     res = {}
     return jsonify(res)
 
@@ -124,8 +122,10 @@ def get_rate_query():
     return [{
             '$addFields': {
                 'rate': {
+                    # handle zero derived case & calculate rate
                     '$cond': [{ '$eq': ["$impressions", 0]}, 0, {"$divide": ['$requests', '$impressions']}]
                 },
+                # Remove irrelevant fields
                 'impressions' : '$$REMOVE',
                 'requests' : '$$REMOVE',
                 '_id' : '$$REMOVE'
@@ -133,4 +133,4 @@ def get_rate_query():
         }]
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0',port=5000)
