@@ -24,4 +24,47 @@ The variables defined hardcoded in the script in constants.</br>
 Its better to get the variables from Environment Variables by the os library that will initate during the docker image deploy. </br>
 If we will plan to use K8S we can also set them in secret files then we will not expose sensetive information in our Repository
 
-How to run:
+<b>How to run:</b>
+
+By Docker:
+Running the following code will create 2 containers of MongoDB and Flask application
+
+``` docker
+cd <Project Path>
+docker-compose up
+```
+
+After the image will build and container will be ready we can send http request to our server in the following url:
+``` 
+http://localhost:5000
+```
+
+<p>To test our application we can run the folloing request to our server:</p>
+</br>
+
+New Request:
+```curl
+curl -X GET "http://127.0.0.1:5000/GetAd?sdk_version=1.1.0&user_name=Niso" 
+Response:
+<VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="2.0"><Ad><InLine><Error><![CDATA[]]></Error><Creatives><Creative><Linear><Duration>00:00:06</Duration><MediaFiles><MediaFile><![CDATA[https://sayollo.nyc3.digitaloceanspaces.com/Covid4.webm]]></MediaFile></MediaFiles><TrackingEvents /></Linear></Creative></Creatives></InLine></Ad></VAST>
+```
+
+New Impression:
+```curl
+curl -X GET "http://127.0.0.1:5000/Impression?sdk_version=1.1.0&user_name=Niso" 
+Response:
+No Content. 204 status code
+```
+
+Statistic:
+```curl
+curl -X GET "http://127.0.0.1:5000/GetStats?filter_type=users"
+curl -X GET "http://127.0.0.1:5000/GetStats?filter_type=sdk" 
+Response:
+[{"rate":0,"user_id":"dana"},{"rate":2.0,"user_id":"yossi"},{"rate":0.6666666666666666,"user_id":"benni"},{"rate":2.0,"user_id":"danny"}]
+```
+
+</br></br>
+<h4>Thanks for the opportunity!</h4>
+
+
