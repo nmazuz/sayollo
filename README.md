@@ -1,7 +1,5 @@
 # Sayollo Home Assigment
 
-<b>Design:</b>
-<p>
 The application written in Python 3.9 with Flask which help me to create the web server </p>
 <b>DB choice: </b>
 I choise MongoDB as the DB for this application for few reasons:
